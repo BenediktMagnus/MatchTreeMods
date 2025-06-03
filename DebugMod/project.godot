@@ -11,3 +11,8 @@ config_version=5
 [application]
 
 config/name="DebugMod"
+config/features=PackedStringArray("4.4")
+
+[autoload]
+
+SaveManager="*res://definitions/save_manager.gd"
