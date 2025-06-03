@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c06tmhqxaqu4y"]
+
+[ext_resource type="Script" uid="uid://cru638r7ios85" path="res://mods/debugMod/mod.gd" id="1_ijb8r"]
+
+[node name="DebugMod" type="Node"]
+script = ExtResource("1_ijb8r")
