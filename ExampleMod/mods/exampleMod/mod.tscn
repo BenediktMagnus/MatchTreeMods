@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwomvokhlmrbi"]
+
+[ext_resource type="Script" uid="uid://cp6k63d5xloc" path="res://mods/exampleMod/mod.gd" id="1_ijb8r"]
+
+[node name="Mod" type="Node"]
+script = ExtResource("1_ijb8r")
