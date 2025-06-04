@@ -47,8 +47,9 @@ var current_map_energy := 0
 
 var last_round := 0
 
-var real_rounds := 0
-var was_reset_this_round := false
+## The real rounds are the matchings the user did (so not counting everything else like using a tool).
+var real_rounds := -1
+var was_reset_this_round := true
 
 var grid_manager: Node2D # Actually a GridManager
 
@@ -87,18 +88,12 @@ func _on_globals_stats_updated ():
 
     last_round = Globals.PlayerTurns
 
-    print("last_map_energy: ", last_map_energy)
-    print("current_map_energy: ", current_map_energy)
-
-    if last_map_energy == current_map_energy:
+    # The mouse_mode is invisible while a tool is being used.
+    if last_map_energy == current_map_energy and Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
         real_rounds += 1
-
-    was_reset_this_round = false
-    print("real_rounds +: ", real_rounds)
+        was_reset_this_round = false
 
 func _save_game_state ():
-    print("_save_game_state")
-
     last_characters = current_characters
     current_characters = []
     for character in grid_manager.Characters:
@@ -127,7 +122,8 @@ func _save_game_state ():
     current_map_energy = Globals.MapEnergy
 
 func reset_game_state ():
-    print("reset_game_state")
+    if current_characters == last_characters:
+        return
 
     Globals.MapEnergy = last_map_energy
     _disconnect_stats_updated()
@@ -148,9 +144,7 @@ func reset_game_state ():
         real_rounds -= 1
         was_reset_this_round = true
 
-    print("real_rounds -: ", real_rounds)
-
-    if real_rounds > 1:
+    if real_rounds > 0:
         grid_manager.ProcessCharacters(true, true)
 
 func _reset_tiles ():
