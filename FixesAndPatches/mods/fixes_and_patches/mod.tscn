@@ -1,8 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dncnmy1bu70ca"]
+[gd_scene load_steps=2 format=3 uid="uid://dncnmy1bu70ca"]
 
-[ext_resource type="Script" uid="uid://sgla6i5scgo0" path="res://mods/fixes_and_patches/mod.gd" id="1_ijb8r"]
-[ext_resource type="Script" path="res://mods/fixes_and_patches/fixes/fixed_map001.gd" id="2_pasl4"]
+[ext_resource type="Script" uid="uid://d0h1gva3i67tt" path="res://mods/fixes_and_patches/fix_map001.gd" id="1_dwe8b"]
 
 [node name="FixesAndPatches" type="Node"]
-script = ExtResource("1_ijb8r")
-fixed_map001_script = ExtResource("2_pasl4")
+
+[node name="FixMap001" type="Node" parent="."]
+script = ExtResource("1_dwe8b")

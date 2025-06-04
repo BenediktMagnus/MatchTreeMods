@@ -1,12 +1,14 @@
 extends Node
 
-@export var fixed_map001_script: Script
+var modding_api # TODO: Typing anyhow?
 
 func _enter_tree ():
-    get_parent().level_loaded.connect(_on_level_loaded)
+    modding_api = get_parent().get_parent() # TODO: Ugly
+
+    modding_api.level_loaded.connect(_on_level_loaded)
 
 func _exit_tree ():
-    get_parent().level_loaded.disconnect(_on_level_loaded)
+    modding_api.level_loaded.disconnect(_on_level_loaded)
 
 func _on_level_loaded (level: Node2D):
     if level.scene_file_path == "res://Levels/Map01/map001.tscn":
