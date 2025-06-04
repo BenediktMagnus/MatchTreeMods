@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy7h7jx1ko8ag"]
+
+[ext_resource type="Script" uid="uid://c6luq03wlaklm" path="res://mods/undo/reset_controller.gd" id="1_v6klq"]
+[ext_resource type="PackedScene" uid="uid://8kieev3ylvh0" path="res://mods/undo/undo_button.tscn" id="2_4wicl"]
+
+[node name="ResetController" type="Node"]
+script = ExtResource("1_v6klq")
+undo_button_packed_scene = ExtResource("2_4wicl")
