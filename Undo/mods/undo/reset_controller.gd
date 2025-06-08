@@ -59,8 +59,8 @@ func _enter_tree ():
 func _ready ():
     grid_manager = get_parent().get_node("%TileMap") # A GridManager
 
-    grid_manager.OnGameOver.connect(_disconnect_stats_updated)
-    grid_manager.OnGameWon.connect(_disconnect_stats_updated)
+    grid_manager.OnGameOver.connect(_on_game_finished)
+    grid_manager.OnGameWon.connect(_on_game_finished)
 
     undo_button = undo_button_packed_scene.instantiate()
     undo_button.pressed.connect(reset_game_state)
@@ -74,6 +74,10 @@ func _ready ():
     _save_game_state()
 
 func _exit_tree ():
+    _disconnect_stats_updated()
+
+func _on_game_finished ():
+    undo_button.visible = false
     _disconnect_stats_updated()
 
 func _connect_stats_updated ():
