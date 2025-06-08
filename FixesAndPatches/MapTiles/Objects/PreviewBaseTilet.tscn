@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ca1lqu76y36ak"]
+
+[node name="PreviewObject" type="Node2D"]
+
+[node name="PreviewSprite" type="Sprite2D" parent="."]
+region_enabled = true
