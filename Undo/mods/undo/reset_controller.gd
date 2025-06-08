@@ -60,9 +60,11 @@ func _enter_tree ():
 
 func _ready ():
     grid_manager = get_parent().get_node("%TileMap") # A GridManager
-
     grid_manager.OnGameOver.connect(_on_game_finished)
     grid_manager.OnGameWon.connect(_on_game_finished)
+
+    var hud = get_parent().get_node("%HUD")
+    hud.CheatWinMap.connect(_on_game_finished)
 
     undo_button = undo_button_packed_scene.instantiate()
     undo_button.pressed.connect(reset_game_state)
