@@ -11,6 +11,7 @@ func _on_scene_loaded (scene_root: Node):
         _on_gnome_loaded(scene_root)
 
 func _on_gnome_loaded (gnome_scene: Node2D):
-    gnome_scene.get_node("BodyParts/HeadAnchor/HeadNormal/EyeBase").visible = false
     gnome_scene.get_node("BodyParts/HeadAnchor/HeadConfused/EyeBase").visible = false
+    gnome_scene.get_node("BodyParts/HeadAnchor/HeadHappy/EyeBase").visible = false
+    gnome_scene.get_node("BodyParts/HeadAnchor/HeadNormal/EyeBase").visible = false
     gnome_scene.get_node("BodyParts/HeadAnchor/HeadSus/EyeBase").visible = false

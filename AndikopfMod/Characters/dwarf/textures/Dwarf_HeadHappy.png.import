@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://os7scdh5krgr"
-path="res://.godot/imported/Dwarf_HeadSus.png-217aa8be1587053ee4c7f69786900d55.ctex"
+uid="uid://d30xkgq7yvnvy"
+path="res://.godot/imported/Dwarf_HeadHappy.png-f1a3b475719272b397be547685505c33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/dwarf/textures/Dwarf_HeadSus.png"
-dest_files=["res://.godot/imported/Dwarf_HeadSus.png-217aa8be1587053ee4c7f69786900d55.ctex"]
+source_file="res://Characters/dwarf/textures/Dwarf_HeadHappy.png"
+dest_files=["res://.godot/imported/Dwarf_HeadHappy.png-f1a3b475719272b397be547685505c33.ctex"]
 
 [params]
 
