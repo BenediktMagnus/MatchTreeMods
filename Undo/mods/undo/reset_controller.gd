@@ -122,7 +122,7 @@ func _save_game_state ():
     current_map_energy = Globals.MapEnergy
 
 func reset_game_state ():
-    if current_characters == last_characters:
+    if current_characters == last_characters and current_tiles == last_tiles:
         return
 
     Globals.MapEnergy = last_map_energy
