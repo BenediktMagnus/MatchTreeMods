@@ -80,7 +80,8 @@ func _connect_stats_updated ():
     Globals.UpdateStats.connect(_on_globals_stats_updated)
 
 func _disconnect_stats_updated ():
-    Globals.UpdateStats.disconnect(_on_globals_stats_updated)
+    if Globals.UpdateStats.is_connected(_on_globals_stats_updated):
+        Globals.UpdateStats.disconnect(_on_globals_stats_updated)
 
 func _on_globals_stats_updated ():
     if Globals.PlayerTurns != last_round:
