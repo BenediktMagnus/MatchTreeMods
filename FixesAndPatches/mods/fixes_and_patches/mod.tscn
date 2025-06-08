@@ -1,8 +1,3 @@
-[gd_scene load_steps=2 format=3 uid="uid://dncnmy1bu70ca"]
-
-[ext_resource type="Script" uid="uid://d0h1gva3i67tt" path="res://mods/fixes_and_patches/fix_map001.gd" id="1_dwe8b"]
+[gd_scene format=3 uid="uid://dncnmy1bu70ca"]
 
 [node name="FixesAndPatches" type="Node"]
-
-[node name="FixMap001" type="Node" parent="."]
-script = ExtResource("1_dwe8b")
