@@ -4,9 +4,11 @@ extends Node
 
 class CharacterState:
     var character: Node2D # Actually a CharacterTile
+    var is_stuck: bool
     var coordinates: Vector2i
-    func _init (_character: Node2D, _coordinates: Vector2i):
+    func _init (_character: Node2D, _is_stuck: bool, _coordinates: Vector2i):
         character = _character
+        is_stuck = _is_stuck
         coordinates = _coordinates
 
 class TileState:
@@ -102,7 +104,7 @@ func _save_game_state ():
     last_characters = current_characters
     current_characters = []
     for character in grid_manager.Characters:
-        var character_state = CharacterState.new(character, character.Coord)
+        var character_state = CharacterState.new(character, character.Stuck, character.Coord)
         current_characters.append(character_state)
 
     last_tiles = current_tiles
@@ -186,6 +188,7 @@ func _restore_missing_tiles ():
 func _reset_characters ():
     for character_state in last_characters:
         character_state.character.Coord = character_state.coordinates
+        character_state.character.ToggleStuckFeedback(character_state.is_stuck)
 
         character_state.character.z_index = character_state.coordinates.y + 3
 
