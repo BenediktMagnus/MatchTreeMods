@@ -4,6 +4,7 @@
 
 - Disables encryption for save games.
 - Enables the build-in cheat buttons for the world map and the level maps.
+- Enables the build-in debugging visualisation for the level maps.
 
 ## Addional Recommendations
 

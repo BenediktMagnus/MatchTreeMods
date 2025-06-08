@@ -21,6 +21,9 @@ func _input (event: InputEvent):
             loaded_world_map.cup_win_mod_button.visible = not loaded_world_map.cup_win_mod_button.visible
         elif loaded_level != null:
             loaded_level.hud.win_level_btn.visible = not loaded_level.hud.win_level_btn.visible
+    elif event.is_action_pressed("debug"):
+        if loaded_level != null:
+            loaded_level.tm.ToggleDebug()
 
 func _on_world_map_loaded (world_map: Node2D):
     loaded_world_map = world_map
