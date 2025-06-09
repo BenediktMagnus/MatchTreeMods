@@ -61,12 +61,17 @@ func _ready ():
     undo_button.pressed.connect(reset_game_state)
     get_parent().get_node("HUD").add_child(undo_button)
 
-    # We need to wait a frame for the grid manager to initialise:
-    await get_tree().process_frame
+    grid_manager.get_node("objects").changed.connect(_after_map_initialised_before_characters_moved)
 
-    # Bring both the current and last game state to the current state (a bit hacky by calling save twice):
+func _after_map_initialised_before_characters_moved ():
+    grid_manager.get_node("objects").changed.disconnect(_after_map_initialised_before_characters_moved)
+
     _save_game_state()
-    _save_game_state()
+
+    last_characters = current_characters
+    last_tiles = current_tiles
+    last_goals = current_goals
+    last_map_energy = current_map_energy
 
 func _exit_tree ():
     _disconnect_stats_updated()
@@ -137,8 +142,7 @@ func reset_game_state ():
         real_rounds -= 1
         was_reset_this_round = true
 
-    if real_rounds > 0:
-        grid_manager.ProcessCharacters(true, true)
+    grid_manager.ProcessCharacters(true, true)
 
 func _reset_tiles ():
     _remove_new_tiles()
