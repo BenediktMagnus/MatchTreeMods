@@ -18,13 +18,6 @@ class TileState:
         object_type = _object_type
         coordinates = _coordinates
 
-class BackgroundTileState:
-    var background_tile: Sprite2D # Actually a Core/backgroundtile.gd
-    var region_rect: Rect2i
-    func _init (_background_tile: Sprite2D, _region_rect: Rect2i):
-        background_tile = _background_tile
-        region_rect = _region_rect
-
 class GoalState:
     var current: int
     var goal: Resource # Actually a Goal
@@ -37,13 +30,11 @@ var undo_button: Button
 
 var last_characters: Array[CharacterState] = []
 var last_tiles: Array[TileState] = []
-var last_background_tile_region_rects: Array[BackgroundTileState] = []
 var last_goals: Array[GoalState] = []
 var last_map_energy := 0
 
 var current_characters: Array[CharacterState] = []
 var current_tiles: Array[TileState] = []
-var current_background_tile_region_rects: Array[BackgroundTileState] = []
 var current_goals: Array[GoalState] = []
 var current_map_energy := 0
 
@@ -115,12 +106,6 @@ func _save_game_state ():
         var tile_state = TileState.new(tile.ObjectType, tile.Coord)
         current_tiles.append(tile_state)
 
-    last_background_tile_region_rects = current_background_tile_region_rects
-    current_background_tile_region_rects = []
-    for background_tile in grid_manager.TilesBG:
-        var background_tile_state = BackgroundTileState.new(background_tile, background_tile.region_rect)
-        current_background_tile_region_rects.append(background_tile_state)
-
     last_goals = current_goals
     current_goals = []
     for goal in grid_manager.LevelGoals:
@@ -147,7 +132,6 @@ func reset_game_state ():
     current_characters = last_characters
     current_tiles = last_tiles
     current_map_energy = last_map_energy
-    current_background_tile_region_rects = last_background_tile_region_rects#
 
     if not was_reset_this_round:
         real_rounds -= 1
@@ -202,8 +186,15 @@ func _reset_characters ():
             .set_ease(Tween.EASE_IN_OUT)
 
 func _reset_background_tiles ():
-    for background_tile_state in last_background_tile_region_rects:
-        background_tile_state.background_tile.region_rect = background_tile_state.region_rect
+    for background_tile in grid_manager.TilesBG:
+        var tile_at_coordinates: Node2D = grid_manager.GetTileAtCoord(background_tile.Coord) # Actually an ObjectTile
+
+        var locked := false
+        if tile_at_coordinates != null:
+            if "Locked" in tile_at_coordinates:
+                locked = tile_at_coordinates.Locked
+
+        background_tile.ToggleTileLocked(locked)
 
 func _reset_goals ():
     for goal_state in last_goals:
