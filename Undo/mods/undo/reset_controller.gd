@@ -142,7 +142,10 @@ func reset_game_state ():
         real_rounds -= 1
         was_reset_this_round = true
 
-    grid_manager.ProcessCharacters(true, true)
+    if real_rounds > 0:
+        grid_manager.ProcessCharacters(true, true)
+    elif not grid_manager.HasPlayerMovesLeft():
+        grid_manager.ProcessCharacters(true)
 
 func _reset_tiles ():
     _remove_new_tiles()
