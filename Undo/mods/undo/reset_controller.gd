@@ -18,24 +18,15 @@ class TileState:
         object_type = _object_type
         coordinates = _coordinates
 
-class GoalState:
-    var current: int
-    var goal: Resource # Actually a Goal
-    func _init (_current: int, _goal: Resource):
-        current = _current
-        goal = _goal
-
 @export var undo_button_packed_scene: PackedScene
 var undo_button: Button
 
 var last_characters: Array[CharacterState] = []
 var last_tiles: Array[TileState] = []
-var last_goals: Array[GoalState] = []
 var last_map_energy := 0
 
 var current_characters: Array[CharacterState] = []
 var current_tiles: Array[TileState] = []
-var current_goals: Array[GoalState] = []
 var current_map_energy := 0
 
 var last_round := 0
@@ -70,7 +61,6 @@ func _after_map_initialised_before_characters_moved ():
 
     last_characters = current_characters
     last_tiles = current_tiles
-    last_goals = current_goals
     last_map_energy = current_map_energy
 
 func _exit_tree ():
@@ -110,12 +100,6 @@ func _save_game_state ():
     for tile in grid_manager.Tiles:
         var tile_state = TileState.new(tile.ObjectType, tile.Coord)
         current_tiles.append(tile_state)
-
-    last_goals = current_goals
-    current_goals = []
-    for goal in grid_manager.LevelGoals:
-        var goal_state = GoalState.new(goal.Current, goal)
-        current_goals.append(goal_state)
 
     last_map_energy = current_map_energy
     current_map_energy = Globals.MapEnergy
@@ -204,6 +188,9 @@ func _reset_background_tiles ():
         background_tile.ToggleTileLocked(locked)
 
 func _reset_goals ():
-    for goal_state in last_goals:
-        goal_state.goal.Current = goal_state.current
+    for goal in grid_manager.LevelGoals:
+        goal.Current = 0
+        for tile in grid_manager.Tiles:
+            goal.CheckGoal(tile)
+
     grid_manager.OnGoalChange.emit(grid_manager.LevelGoals)
