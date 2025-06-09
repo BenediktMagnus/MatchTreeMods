@@ -15,4 +15,5 @@ config/features=PackedStringArray("4.4")
 
 [autoload]
 
+Globals="*res://definitions/globals.gd"
 SaveManager="*res://definitions/save_manager.gd"

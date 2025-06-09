@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://c06tmhqxaqu4y"]
+[gd_scene load_steps=4 format=3 uid="uid://c06tmhqxaqu4y"]
 
 [ext_resource type="Script" uid="uid://cru638r7ios85" path="res://mods/debugMod/mod.gd" id="1_ijb8r"]
 [ext_resource type="Script" uid="uid://d2wahuohicvpa" path="res://mods/debugMod/debug_built_ins.gd" id="2_fq6ve"]
+[ext_resource type="Script" uid="uid://dlws0o412qcdl" path="res://mods/debugMod/map_editor.gd" id="3_qhe5u"]
 
 [node name="DebugMod" type="Node"]
 script = ExtResource("1_ijb8r")
 
 [node name="DebugBuiltIns" type="Node" parent="."]
 script = ExtResource("2_fq6ve")
+
+[node name="MapEditor" type="Node" parent="."]
+script = ExtResource("3_qhe5u")
